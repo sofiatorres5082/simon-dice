@@ -4,7 +4,7 @@ body {
 }
 
 p {
-  font-family: "takeover";
+  font-family: "takeover", "Pixelify Sans";
   color: white;
   letter-spacing: 2px;
   user-select: none;
@@ -78,7 +78,7 @@ p {
   text-align: center;
   color: white;
   user-select: none;
-  font-family: "takeover";
+  font-family: "takeover", "Pixelify Sans";
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -104,7 +104,7 @@ p {
   font-size: 19px;
   text-align: center;
   cursor: pointer;
-  font-family: "takeover";
+  font-family: "takeover", "Pixelify Sans";
   letter-spacing: 2px;
   font-weight: 400;
   transform: translateX(-50%);
@@ -172,7 +172,7 @@ p {
 }
 
 .game-over-title {
-  font-family: "Tiny5";
+  font-family: "Tiny5", "Pixelify Sans";
   font-size: 50px;
   color: #df6c8d;
   letter-spacing: -1px;
@@ -191,7 +191,7 @@ p {
   font-size: 15px;
   text-align: center;
   cursor: pointer;
-  font-family: "takeover";
+  font-family: "takeover", "Pixelify Sans";
   letter-spacing: 2px;
   font-weight: 400;
 }
