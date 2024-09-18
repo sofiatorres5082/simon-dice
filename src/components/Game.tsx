@@ -246,7 +246,7 @@ export default function Game() {
       <Modal
         showModal={showConfigModal}
         onClose={() => setShowConfigModal(false)}
-        title={<h2 className="config-title">configuracion</h2>}
+        title={<h2 className="config-title">CONFIGURACION</h2>}
       >
         <div className="config-buttons-container">
           <button
