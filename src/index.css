@@ -1,0 +1,392 @@
+body {
+  font-family: sans-serif;
+  background-color: #292929;
+}
+
+p {
+  font-family: "takeover";
+  color: white;
+  letter-spacing: 2px;
+  user-select: none;
+}
+
+/* Contenedores y estilos */
+
+.principal-title-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+
+.principal-title {
+  font-family: "powerpuff-girls";
+  color: #e289a4;
+  font-size: 45px;
+  user-select: none;
+  letter-spacing: 6px;
+  text-shadow: -1px -1px 0 rgb(0, 0, 0), 1px -1px 0 black, -1px 1px 0 black,
+    1px 1px 0 black;
+}
+
+.button-board {
+  width: 150px;
+  height: 150px;
+  border: none;
+  border-radius: 20%;
+  margin: 10px;
+  cursor: pointer;
+  transition: background-color 0.9s ease, box-shadow 0.2s ease;
+}
+
+.button-board:hover {
+  background-color: white;
+}
+
+.button-board:active {
+  transform: scale(0.98);
+  box-shadow: 0 0 40px rgb(230, 141, 175);
+}
+
+.row {
+  justify-content: center;
+}
+
+.game {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.score {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: #292929;
+  border-radius: 50%;
+  line-height: 100px;
+  text-align: center;
+  color: white;
+  user-select: none;
+  font-family: "delight_coffeeregular";
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.start-button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  height: 150px;
+}
+
+.startButton {
+  position: absolute;
+  width: 150px;
+  padding: 15px 30px;
+  background: none;
+  color: #e0859f;
+  border: 3px solid #e0859f;
+  border-radius: 30px;
+  font-size: 19px;
+  text-align: center;
+  cursor: pointer;
+  font-family: "takeover";
+  letter-spacing: 2px;
+  font-weight: 400;
+  transform: translateX(-50%);
+  left: 50%;
+}
+
+.startButton:hover {
+  background-color: #ff9eb5;
+  color: #df6c8d;
+  transition: 0.5s ease-in-out;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Modal general */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  position: relative;
+  background-color: #292929;
+  padding: 50px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 500px;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/*Modal Game Over*/
+.modal-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.restart-container {
+  margin-top: 2rem;
+}
+
+.game-over-title {
+  font-family: "pixel";
+  font-size: 50px;
+  color: #df6c8d;
+  letter-spacing: -1px;
+  user-select: none;
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+    1px 1px 0 black;
+}
+
+.restart-button {
+  width: 150px;
+  padding: 10px 30px;
+  background: none;
+  color: #e0859f;
+  border: 3px solid #e0859f;
+  border-radius: 30px;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+  font-family: "takeover";
+  letter-spacing: 2px;
+  font-weight: 400;
+}
+
+.restart-button:hover {
+  background-color: #ff9eb5;
+  color: #df6c8d;
+  transition: 0.5s ease-in-out;
+}
+
+/* Modal Configuracion */
+.config-title {
+  font-family: "pixel";
+  font-size: 35px;
+  letter-spacing: 4px;
+  color: #e0859f;
+  user-select: none;
+}
+
+.config-buttons-container {
+  display: flex;
+  gap: 40px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.theme-container {
+  display: flex;
+  gap: 40px;
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.config-button {
+  background-color: #aa536d;
+  border: none;
+  border-radius: 10px;
+  width: 90px;
+  height: 30px;
+  font-family: "takeover";
+  color: white;
+  cursor: pointer;
+}
+
+.config-button:hover {
+  background-color: #ff9eb5;
+  transition: 0.5s ease-in-out;
+}
+
+.config-button-active {
+  background-color: #ff9eb5;
+  border: 2px solid #aa536d;
+}
+
+.config-btn {
+  cursor: pointer;
+  border: 2px solid rgb(255, 255, 255);
+  font-family: "takeover";
+  cursor: pointer;
+  border: 2px solid rgb(255, 255, 255);
+  font-family: "takeover";
+  font-size: 16px;
+  color: rgb(255, 255, 255);
+  padding: 10px 30px;
+  transition: 1508ms;
+  width: 196px;
+  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+  border-radius: 11px 10px 11px 11px;
+  background: linear-gradient(
+    90deg,
+    rgb(194, 76, 107) 0%,
+    rgb(223, 136, 159) 100%
+  );
+  --hover-bgc: #e0a5ba;
+  --hover-borderSize: 2;
+  --hover-borderc: #ffffff;
+  --hover-color: #ffffff;
+  --hover-width: 189px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.config-btn:hover {
+  color: rgb(255, 255, 255);
+  width: 189px;
+  background: rgb(224, 165, 186) none repeat scroll 0% 0% / auto padding-box
+    border-box;
+  border-color: rgb(255, 255, 255);
+  border-width: 3px;
+  border-style: solid;
+}
+
+/* Fuentes */
+
+@font-face {
+  font-family: "delight_coffeeregular";
+  src: url("./fonts/delight_coffee-webfont.woff2") format("woff2"),
+    url("./fonts/delight_coffee-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "takeover";
+  src: url("./fonts/Takeover.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "pixel";
+  src: url("./fonts/pixel.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "powerpuff-girls";
+  src: url("./fonts/Powerpuff-Girls.ttf.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Media queries */
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: row;
+    text-align: center;
+  }
+
+  .modal-content {
+    width: 50%;
+  }
+
+  .principal-title {
+    font-size: 35px;
+  }
+
+  .game-over-title {
+    font-size: 30px;
+    margin: 0;
+    text-align: center;
+  }
+
+  p {
+    font-size: 15px;
+  }
+
+  .restart-button {
+    font-size: 15px;
+  }
+
+  .config-title {
+    font-size: 22px;
+  }
+
+  .config-buttons-container {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .theme-container {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 558px) {
+  .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .principal-title {
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .button-board {
+    width: 130px;
+    height: 130px;
+  }
+
+  .score {
+    font-size: 12px;
+  }
+
+  .startButton {
+    font-size: 15px;
+  }
+
+  .config-title {
+    font-size: 14px;
+  }
+}
