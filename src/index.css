@@ -8,6 +8,8 @@ p {
   color: white;
   letter-spacing: 2px;
   user-select: none;
+  animation: riseUp 1.5s ease-in-out;
+  animation-fill-mode: backwards;
 }
 
 /* Contenedores y estilos */
@@ -28,6 +30,8 @@ p {
   letter-spacing: 6px;
   text-shadow: -1px -1px 0 rgb(0, 0, 0), 1px -1px 0 black, -1px 1px 0 black,
     1px 1px 0 black;
+  animation: riseUp 1s ease-in-out;
+  animation-fill-mode: backwards;
 }
 
 .button-board {
@@ -38,6 +42,8 @@ p {
   margin: 10px;
   cursor: pointer;
   transition: background-color 0.9s ease, box-shadow 0.2s ease;
+  animation: riseUp 1s ease-in-out;
+  animation-fill-mode: backwards;
 }
 
 .button-board:hover {
@@ -231,7 +237,7 @@ p {
   border-radius: 10px;
   width: 90px;
   height: 30px;
-  font-family: "takeover";
+  font-family: "takeover", "Pixelify Sans";
   color: white;
   cursor: pointer;
 }
@@ -252,7 +258,7 @@ p {
   font-family: "takeover";
   cursor: pointer;
   border: 2px solid rgb(255, 255, 255);
-  font-family: "takeover";
+  font-family: "takeover", "Pixelify Sans";
   font-size: 16px;
   color: rgb(255, 255, 255);
   padding: 10px 30px;
@@ -274,6 +280,8 @@ p {
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  animation: riseUp 1s ease-in-out;
+  animation-fill-mode: backwards;
 }
 
 .config-btn:hover {
@@ -306,6 +314,19 @@ p {
   font-optical-sizing: auto;
   font-weight: 700;
   font-style: normal;
+}
+
+/* Animaciones */
+
+@keyframes riseUp {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 /* Media queries */

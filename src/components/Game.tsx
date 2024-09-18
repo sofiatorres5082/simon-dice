@@ -191,7 +191,7 @@ export default function Game() {
             className="config-btn"
             onClick={() => setShowConfigModal(true)}
           >
-            Configuracion
+            CONFIGURACION
           </button>
         </div>
       </div>
@@ -216,7 +216,7 @@ export default function Game() {
       <div className="start-button-container">
         {state.gameStatus === "notStarted" && !state.play.score && (
           <button onClick={startHandle} className="startButton">
-            Jugar
+            JUGAR
           </button>
         )}
       </div>
