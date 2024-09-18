@@ -4,7 +4,7 @@ body {
 }
 
 p {
-  font-family: "takeover", "Pixelify Sans";
+  font-family: "Pixelify Sans";
   color: white;
   letter-spacing: 2px;
   user-select: none;
@@ -84,7 +84,7 @@ p {
   text-align: center;
   color: white;
   user-select: none;
-  font-family: "takeover", "Pixelify Sans";
+  font-family: "Pixelify Sans";
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -110,7 +110,7 @@ p {
   font-size: 19px;
   text-align: center;
   cursor: pointer;
-  font-family: "takeover", "Pixelify Sans";
+  font-family: "Pixelify Sans";
   letter-spacing: 2px;
   font-weight: 400;
   transform: translateX(-50%);
@@ -197,7 +197,7 @@ p {
   font-size: 15px;
   text-align: center;
   cursor: pointer;
-  font-family: "takeover", "Pixelify Sans";
+  font-family: "Pixelify Sans";
   letter-spacing: 2px;
   font-weight: 400;
 }
@@ -237,7 +237,7 @@ p {
   border-radius: 10px;
   width: 90px;
   height: 30px;
-  font-family: "takeover", "Pixelify Sans";
+  font-family: "Pixelify Sans";
   color: white;
   cursor: pointer;
 }
@@ -295,13 +295,6 @@ p {
 }
 
 /* Fuentes */
-
-@font-face {
-  font-family: "takeover";
-  src: url("./fonts/Takeover.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
 
 .tiny5-regular {
   font-family: "Tiny5", sans-serif;
