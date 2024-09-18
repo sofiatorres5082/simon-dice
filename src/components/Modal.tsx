@@ -23,7 +23,7 @@ export default function Modal({
           {children}
         </div>
         <button className="close-button" onClick={onClose}>
-        <img src="./public/images/cerrarIcon.png" alt="Cerrar" style={{ width: '50px', height: '50px' }} />
+        <img src="./images/cerrarIcon.png" alt="Cerrar" style={{ width: '50px', height: '50px' }} />
         </button>
       </div>
     </div>
