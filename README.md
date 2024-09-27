@@ -13,38 +13,28 @@ El "Juego de Patrón de Memoria" es una implementación en React del clásico ju
 - **Manejo de Estado con React:** Utiliza `useState` y `useEffect` para gestionar el estado del juego.
 - **Diseño Responsivo:** Adaptado para verse bien en dispositivos móviles y pantallas de escritorio.
 
-## Requisitos
-
-- Node.js (v16 o superior)
-- npm (v7 o superior) o Yarn
-
 ## Instalación
 
 1. **Clonar el Repositorio:**
 
-   ```bash
-   git clone https://github.com/sofiatorres5082/simon-dice.git
-
-   ```
+```bash
+git clone https://github.com/sofiatorres5082/simon-dice.git
+```
 
 2. **Navegar al Directorio del Proyecto**
 
+```bash
 cd simon-dice
+ ```
 
 3. **Instalar las Dependencias**
 
+```bash
 npm install
+```
 
 4. **Iniciar el Servidor de Desarrollo**
 
+```bash
 npm run dev
-
-## Estructura del Proyecto
-
-src/: Contiene todos los archivos fuente de React.
-Button.js: Componente de botón del juego.
-Modal.js: Componente de modal utilizado para mostrar mensajes y configuraciones.
-Game.js: Componente principal del juego que maneja la lógica y el estado.
-public/: Contiene archivos estáticos como imágenes y el archivo index.html.
-package.json: Archivo de configuración del proyecto con las dependencias y scripts.
-README.md: Este archivo
+ ```
