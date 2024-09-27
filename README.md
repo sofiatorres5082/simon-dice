@@ -1,10 +1,10 @@
 # Juego de Patrón de Memoria en React
 
-## Descripción
+⛧─── ## Descripción ───⛧
 
 El "Juego de Patrón de Memoria" es una implementación en React del clásico juego "Simon Says". Los jugadores deben memorizar y repetir un patrón de colores que se muestra en secuencia. Cada vez que el jugador repite correctamente el patrón, se agrega un nuevo paso, aumentando la dificultad. Si el jugador comete un error, el juego termina y se muestra la puntuación obtenida.
 
-## Características
+⛧─── ## Características ───⛧
 
 - **Interfaz de Usuario:** Botones de colores que se iluminan en secuencia.
 - **Lógica del Juego:** Genera y muestra una secuencia de botones. Los jugadores deben repetir la secuencia correctamente para avanzar.
@@ -13,7 +13,7 @@ El "Juego de Patrón de Memoria" es una implementación en React del clásico ju
 - **Manejo de Estado con React:** Utiliza `useState` y `useEffect` para gestionar el estado del juego.
 - **Diseño Responsivo:** Adaptado para verse bien en dispositivos móviles y pantallas de escritorio.
 
-## Instalación
+⛧─── ## Instalación ───⛧
 
 1. **Clonar el Repositorio:**
 
