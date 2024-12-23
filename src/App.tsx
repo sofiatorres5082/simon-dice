@@ -1,9 +1,15 @@
+import { Routes, Route } from "react-router-dom";
+import MainPage from "./pages/MainPage";
+import GamePage from "./pages/GamePage";
 import "./App.css";
 
 function App() {
   return (
     <>
-      <h1 className="text-4xl font-bold text-pink-600">¡Hola, Tailwind con TypeScript!</h1>
+      <Routes>
+      <Route path="/" element={<MainPage />} />
+      <Route path="/game" element={<GamePage />} />
+    </Routes>
     </>
   );
 }

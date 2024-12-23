@@ -1,3 +1,53 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* FONTS */
+
+@font-face {
+  font-family: 'BPreplay';
+  src: url('assets/fonts/BPreplay.woff2') format('woff2'),
+      url('assets/fonts/BPreplay.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'BubbleGum';
+  src: url('assets/fonts/BubbleGum.woff2') format('woff2'),
+      url('assets/fonts/BubbleGum.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Vividly';
+  src: url('assets/fonts/Vividly-Regular.woff2') format('woff2'),
+      url('assets/fonts/Vividly-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Vividly';
+  src: url('assets/fonts/Vividly-Regular.woff2') format('woff2'),
+      url('assets/fonts/Vividly-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-bpreplay {
+  font-family: "BPReplay", sans-serif;
+}
+
+.font-bubblegum {
+  font-family: "BubbleGum", sans-serif;
+}
+
+.font-vividly {
+  font-family: "Vividly", sans-serif;
+}
