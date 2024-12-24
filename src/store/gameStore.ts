@@ -11,6 +11,7 @@ type GameState = {
   addPlayerInput: (num: number) => void; // Agregar input del jugador.
   resetInput: () => void; // Limpiar el input del jugador.
   incrementScore: () => void; // Incrementar la puntuación.
+  resetGame: () => void;
 };
 
 // Creamos el store usando el tipo `GameState`.
@@ -31,4 +32,12 @@ export const useGameStore = create<GameState>((set) => ({
     set((state) => ({ playerInput: [...state.playerInput, num] })),
   resetInput: () => set({ playerInput: [] }),
   incrementScore: () => set((state) => ({ score: state.score + 1 })),
+  resetGame: () =>
+    set((state) => ({
+      ...state,
+      score: 0,
+      sequence: [],
+      playerInput: [],
+      isGameActive: false,
+    })),
 }));

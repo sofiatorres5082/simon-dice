@@ -4,9 +4,15 @@ interface SimonButtonProps {
   color: string;
   index: number;
   onClick: () => void;
+  isActive: boolean;
 }
 
-const SimonButton: React.FC<SimonButtonProps> = ({ color, index, onClick }) => {
+const SimonButton: React.FC<SimonButtonProps> = ({
+  color,
+  index,
+  onClick,
+  isActive,
+}) => {
   const borderRadius = [
     "rounded-3xl",
     "rounded-3xl",
@@ -23,7 +29,9 @@ const SimonButton: React.FC<SimonButtonProps> = ({ color, index, onClick }) => {
 
   return (
     <button
-      className={`absolute w-[42%] h-[42%] ${color} ${borderRadius[index]} hover:brightness-110 transition-all duration-200`}
+      className={`absolute w-[42%] h-[42%] ${color} ${borderRadius[index]} ${
+        isActive ? "animate-pulse" : ""
+      } hover:brightness-110 transition-all duration-200`}
       style={positions[index]}
       onClick={onClick}
     ></button>
