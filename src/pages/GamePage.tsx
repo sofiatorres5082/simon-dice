@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 import { useEffect, useState } from "react";
 import { useGameStore } from "../store/gameStore";
 
@@ -15,6 +13,7 @@ interface GamePageProps {
 const GamePage: React.FC<GamePageProps> = ({ onBack }) => {
   const {
     score,
+    maxScore,
     sequence,
     playerInput,
     isGameActive,
@@ -94,31 +93,32 @@ const GamePage: React.FC<GamePageProps> = ({ onBack }) => {
           score={score}
           isGameActive={isGameActive}
           playerInputLength={playerInput.length}
+          maxScore={maxScore}
         />
       </div>
       <div className="flex flex-col justify-center items-center gap-4">
         {/* Botones del juego */}
         <GameContainer isGameActive={isGameActive} score={score}>
           <SimonButton
-            color="bg-[#ee99b1]"
+            color="bg-[#f189c1]"
             index={0}
             onClick={() => handlePlayerInput(0)}
             isActive={activeButton === 0}
           />
           <SimonButton
-            color="bg-[#b299ee]"
+            color="bg-[#e05b7a]"
             index={1}
             onClick={() => handlePlayerInput(1)}
             isActive={activeButton === 1}
           />
           <SimonButton
-            color="bg-[#da99ee]"
+            color="bg-[#ea7e9c]"
             index={2}
             onClick={() => handlePlayerInput(2)}
             isActive={activeButton === 2}
           />
           <SimonButton
-            color="bg-[#9f99ee]"
+            color="bg-[#e25d90]"
             index={3}
             onClick={() => handlePlayerInput(3)}
             isActive={activeButton === 3}

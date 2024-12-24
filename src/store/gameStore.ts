@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 type GameState = {
   score: number; // Puntuación actual del jugador.
+  maxScore: number; // Puntuacion mas alta del jugador.
   sequence: number[]; // Secuencia generada por el juego.
   playerInput: number[]; // Input del jugador.
   isGameActive: boolean; // ¿El juego está en curso?
@@ -18,6 +19,7 @@ type GameState = {
 export const useGameStore = create<GameState>((set) => ({
   // Estado inicial del juego.
   score: 0,
+  maxScore: parseInt(localStorage.getItem("maxScore") || "0", 10),
   sequence: [],
   playerInput: [],
   isGameActive: false,
@@ -25,7 +27,14 @@ export const useGameStore = create<GameState>((set) => ({
   // Funciones para manipular el estado.
   startGame: () =>
     set({ isGameActive: true, score: 0, sequence: [], playerInput: [] }),
-  endGame: () => set({ isGameActive: false }),
+  endGame: () =>
+    set((state) => {
+      if (state.score > state.maxScore) {
+        localStorage.setItem("maxScore", state.score.toString());
+        return { isGameActive: false, maxScore: state.score };
+      }
+      return { isGameActive: false };
+    }),
   addToSequence: (num) =>
     set((state) => ({ sequence: [...state.sequence, num] })),
   addPlayerInput: (num) =>
