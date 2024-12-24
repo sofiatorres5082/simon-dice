@@ -9,7 +9,7 @@ interface LoadingPageProps {
         isLoading ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
       }`}
     >
-      <div className="w-[clamp(80px,20vw,120px)] aspect-square -translate-y-8">
+      <div className="w-[clamp(80px,15vw,120px)] aspect-square -translate-y-8">
         <img
           src="/images/star2.png"
           alt="loading"

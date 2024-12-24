@@ -96,18 +96,15 @@ const GamePage: React.FC<GamePageProps> = ({ onBack, setIsLoading }) => {
     }
   }, [isGameActive, sequence]);
 
- if (!isReady) {
+  if (!isReady) {
     return <LoadingPage isLoading={!isReady} />;
   }
-  
+
   return (
     <div className="min-h-screen bg-[url('/images/SimonDiceBackground.png')] bg-cover bg-center bg-fixed overflow-hidden">
       {/* Puntuación */}
       <div className="absolute top-0 left-0 m-4">
         <ScoreDisplay
-          score={score}
-          isGameActive={isGameActive}
-          playerInputLength={playerInput.length}
           maxScore={maxScore}
         />
       </div>
@@ -143,11 +140,11 @@ const GamePage: React.FC<GamePageProps> = ({ onBack, setIsLoading }) => {
 
           <button
             onClick={onBack}
-            className="font-vividly text-[#ee97af] text-[clamp(1rem,4vw,1.5rem)]
-            py-1 px-8 border-4 border-[#ee97af] rounded-full
-            transform transition-all duration-300
-            hover:scale-110 active:scale-95
-            md:hover:scale-105"
+            className="font-pedagogique text-[#ee97af] text-center 
+                   text-[clamp(1rem, 4vw, 1.25rem)] py-1.5 px-4
+                   border-4 border-[#ee97af] rounded-full 
+                   transform transition-all duration-300 
+                   hover:scale-110"
           >
             Volver al Inicio
           </button>
