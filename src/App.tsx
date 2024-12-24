@@ -1,5 +1,5 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
-import { Suspense, lazy, useState } from "react";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { Suspense, lazy, useEffect, useState } from "react";
 
 const MainPage = lazy(() => import("./pages/MainPage"));
 const GamePage = lazy(() => import("./pages/GamePage"));
@@ -10,33 +10,42 @@ import "./App.css";
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleStart = () => {
+  useEffect(() => {
+    setIsLoading(false);
+  }, [location]);
+
+  const handleNavigation = (path: string) => {
     setIsLoading(true);
     setTimeout(() => {
-      setIsLoading(false);
-      navigate("/game");
-    }, 1500); 
-  };
-
-  const handleBackToMain = () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      navigate("/");
-    }, 1500);
+      navigate(path);
+    }, 800);
   };
 
   return (
     <div>
-    {isLoading && <LoadingPage />}
-    <Suspense fallback={<LoadingPage />}>
-      <Routes>
-        <Route path="/" element={<MainPage onStart={handleStart} />} />
-        <Route path="/game" element={<GamePage onBack={handleBackToMain} />} />
-      </Routes>
-    </Suspense>
-  </div>
+      {/* Componente de carga */}
+      <LoadingPage isLoading={isLoading} />
+
+      <Suspense fallback={<LoadingPage isLoading={isLoading} />}>
+        <Routes>
+          <Route
+            path="/"
+            element={<MainPage onStart={() => handleNavigation("/game")} />}
+          />
+          <Route
+            path="/game"
+            element={
+              <GamePage
+                onBack={() => handleNavigation("/")}
+                setIsLoading={setIsLoading}
+              />
+            }
+          />
+        </Routes>
+      </Suspense>
+    </div>
   );
 }
 

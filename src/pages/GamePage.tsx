@@ -5,12 +5,14 @@ import SimonButton from "../components/SimonButton";
 import ScoreDisplay from "../components/ScoreDisplay";
 import StartButton from "../components/StartButton";
 import GameContainer from "../components/GameContainer";
+import LoadingPage from "./LoadingPage";
 
 interface GamePageProps {
   onBack: () => void;
+  setIsLoading: (isLoading: boolean) => void;
 }
 
-const GamePage: React.FC<GamePageProps> = ({ onBack }) => {
+const GamePage: React.FC<GamePageProps> = ({ onBack, setIsLoading }) => {
   const {
     score,
     maxScore,
@@ -27,17 +29,28 @@ const GamePage: React.FC<GamePageProps> = ({ onBack }) => {
   } = useGameStore();
 
   const [activeButton, setActiveButton] = useState<number | null>(null);
+  const [isReady, setIsReady] = useState(false);
 
-  // Función para iniciar el juego.
+  useEffect(() => {
+    // Simular preparación de la página del juego
+    const prepareGame = async () => {
+      setIsLoading(true); // Activamos la pantalla de carga
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulación de carga
+      setIsReady(true);
+      setIsLoading(false); // Desactivamos la pantalla de carga
+    };
+
+    prepareGame();
+  }, [setIsLoading]);
+
   const handleStartGame = () => {
-    resetGame(); // Reinicia el juego antes de iniciar una nueva partida
+    resetGame();
     startGame();
     setTimeout(() => {
       addToSequence(Math.floor(Math.random() * 4));
     }, 100);
   };
 
-  // Función para manejar el input del jugador
   const handlePlayerInput = (num: number) => {
     addPlayerInput(num);
     const newPlayerInput = [...playerInput, num];
@@ -60,10 +73,9 @@ const GamePage: React.FC<GamePageProps> = ({ onBack }) => {
   };
 
   useEffect(() => {
-    resetGame(); // Reiniciar el juego cuando el componente se monte
+    resetGame();
   }, []);
 
-  // Efecto para iniciar el juego automáticamente cuando cambia el estado
   useEffect(() => {
     if (isGameActive) {
       const timers: NodeJS.Timeout[] = [];
@@ -78,17 +90,20 @@ const GamePage: React.FC<GamePageProps> = ({ onBack }) => {
         timers.push(timer);
       });
 
-      // Limpia los temporizadores cuando el efecto se desmonta o cambia
       return () => {
         timers.forEach((timer) => clearTimeout(timer));
       };
     }
   }, [isGameActive, sequence]);
 
+ if (!isReady) {
+    return <LoadingPage isLoading={!isReady} />;
+  }
+  
   return (
     <div className="min-h-screen bg-[url('/images/SimonDiceBackground.png')] bg-cover bg-center bg-fixed overflow-hidden">
       {/* Puntuación */}
-      <div className="mb-10">
+      <div className="absolute top-0 left-0 m-4">
         <ScoreDisplay
           score={score}
           isGameActive={isGameActive}
@@ -96,46 +111,47 @@ const GamePage: React.FC<GamePageProps> = ({ onBack }) => {
           maxScore={maxScore}
         />
       </div>
-      <div className="flex flex-col justify-center items-center gap-4">
-        {/* Botones del juego */}
-        <GameContainer isGameActive={isGameActive} score={score}>
-          <SimonButton
-            color="bg-[#f189c1]"
-            index={0}
-            onClick={() => handlePlayerInput(0)}
-            isActive={activeButton === 0}
-          />
-          <SimonButton
-            color="bg-[#e05b7a]"
-            index={1}
-            onClick={() => handlePlayerInput(1)}
-            isActive={activeButton === 1}
-          />
-          <SimonButton
-            color="bg-[#ea7e9c]"
-            index={2}
-            onClick={() => handlePlayerInput(2)}
-            isActive={activeButton === 2}
-          />
-          <SimonButton
-            color="bg-[#e25d90]"
-            index={3}
-            onClick={() => handlePlayerInput(3)}
-            isActive={activeButton === 3}
-          />
-          {!isGameActive && (
-            <div className="absolute flex items-center justify-center rounded-full z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <StartButton onClick={handleStartGame} />
-            </div>
-          )}
-        </GameContainer>
 
-        <button
-          onClick={onBack}
-          className="mt-10 font-vividly text-[#ee97af] text-center text-[clamp(1rem,4vw,1.5rem)] py-0.5 px-4 border-4 border-[#ee97af] rounded-full transform transition-all duration-300 hover:scale-110"
-        >
-          Volver al Inicio
-        </button>
+      <div className="max-w-4xl mx-auto flex flex-col items-center pt-20">
+        <div className="flex flex-col items-center gap-10 w-full max-w-md px-4">
+          {/* Contenedor del juego */}
+          <GameContainer isGameActive={isGameActive} score={score}>
+            {/* Botones del juego */}
+            {[0, 1, 2, 3].map((num) => (
+              <SimonButton
+                key={num}
+                color={
+                  [
+                    "bg-[#ee94b2]",
+                    "bg-[#e05b7a]",
+                    "bg-[#ea7e9c]",
+                    "bg-[#e25d90]",
+                  ][num]
+                }
+                index={num}
+                onClick={() => handlePlayerInput(num)}
+                isActive={activeButton === num}
+              />
+            ))}
+
+            {!isGameActive && (
+              <div className="absolute flex items-center justify-center w-[15%] h-[15%] sm:w-[20%] sm:h-[20%] min-w-[30px] min-h-[30px] sm:min-w-[50px] sm:min-h-[50px] max-w-[80px] max-h-[80px] sm:max-w-[100px] sm:max-h-[100px] rounded-full z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <StartButton onClick={handleStartGame} />
+              </div>
+            )}
+          </GameContainer>
+
+          <button
+            onClick={onBack}
+            className="font-vividly text-[#ee97af] text-[clamp(1rem,4vw,1.5rem)]
+            py-1 px-8 border-4 border-[#ee97af] rounded-full
+            transform transition-all duration-300
+            hover:scale-110 active:scale-95
+            md:hover:scale-105"
+          >
+            Volver al Inicio
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -40,6 +40,24 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Pedagogique';
+  src: url('assets/fonts/Pedagogique-Medium-Regular.woff2') format('woff2'),
+      url('assets/fonts/Pedagogique-Medium-Regular.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pedagogique';
+  src: url('assets/fonts/Pedagogique-Medium-Regular.woff2') format('woff2'),
+      url('assets/fonts/Pedagogique-Medium-Regular.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 .font-bpreplay {
   font-family: "BPReplay", sans-serif;
 }
@@ -50,4 +68,8 @@
 
 .font-vividly {
   font-family: "Vividly", sans-serif;
+}
+
+.font-pedagogique {
+  font-family: "Pedagogique", sans-serif;
 }

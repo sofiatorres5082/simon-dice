@@ -11,13 +11,22 @@ export default {
       },
       keyframes: {
         glow: {
-          "0%, 100%": { transform: "scale(1)", opacity: "0.8", filter: "brightness(1)" },
-          "50%": { transform: "scale(1.2)", opacity: "1", filter: "brightness(1.5)" },
+          "0%, 100%": {
+            transform: "scale(1)",
+            opacity: "0.8",
+            filter: "brightness(1)",
+          },
+          "50%": {
+            transform: "scale(1.2)",
+            opacity: "1",
+            filter: "brightness(1.5)",
+          },
         },
         rotateCenter: {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
         },
+
         fadeIn: {
           "0%": { opacity: 0 },
           "100%": { opacity: 1 },
@@ -30,5 +39,4 @@ export default {
     },
   },
   plugins: [],
-}
-
+};

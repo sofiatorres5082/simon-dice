@@ -7,25 +7,16 @@ interface ScoreDisplayProps {
   maxScore: number;
 }
 
-const ScoreDisplay: React.FC<ScoreDisplayProps> = ({ score, isGameActive, playerInputLength, maxScore }) => {
+const ScoreDisplay: React.FC<ScoreDisplayProps> = ({
+  score,
+  isGameActive,
+  playerInputLength,
+  maxScore,
+}) => {
   return (
-    <div>
-      <p>
-        {isGameActive ? (
-          <>
-            Puntaje: <span className="font-bold">{score}</span>
-          </>
-        ) : (
-          <>
-            {playerInputLength === 0
-              ? "¡Preparate para jugar!"
-              : "Juego terminado. Puntaje final:"}{" "}
-            <span className="font-bold">{score}</span>
-          </>
-        )}
-      </p>
-      <p>
-        Puntuación Máxima: <span className="font-bold">{maxScore}</span>
+    <div className="text-center font-pedagogique text-white space-y-2">
+      <p className="text-[clamp(1rem, 3vw, 1.5rem)]">
+        máxima puntuación: <span className="text-white">{maxScore}</span>
       </p>
     </div>
   );
