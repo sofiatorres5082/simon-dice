@@ -8,7 +8,11 @@ import ScoreDisplay from "../components/ScoreDisplay";
 import StartButton from "../components/StartButton";
 import GameContainer from "../components/GameContainer";
 
-const GamePage = () => {
+interface GamePageProps {
+  onBack: () => void;
+}
+
+const GamePage: React.FC<GamePageProps> = ({ onBack }) => {
   const {
     score,
     sequence,
@@ -126,16 +130,12 @@ const GamePage = () => {
           )}
         </GameContainer>
 
-        <Link
-          to="/"
-          className="mt-10 font-vividly text-[#ee97af] text-center 
-                   text-[clamp(1rem,4vw,1.5rem)] py-0.5 px-4
-                   border-4 border-[#ee97af] rounded-full 
-                   transform transition-all duration-300 
-                   hover:scale-110"
+        <button
+          onClick={onBack}
+          className="mt-10 font-vividly text-[#ee97af] text-center text-[clamp(1rem,4vw,1.5rem)] py-0.5 px-4 border-4 border-[#ee97af] rounded-full transform transition-all duration-300 hover:scale-110"
         >
           Volver al Inicio
-        </Link>
+        </button>
       </div>
     </div>
   );

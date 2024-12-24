@@ -29,9 +29,13 @@ const SimonButton: React.FC<SimonButtonProps> = ({
 
   return (
     <button
-      className={`absolute w-[42%] h-[42%] ${color} ${borderRadius[index]} ${
-        isActive ? "animate-pulse" : ""
-      } hover:brightness-110 transition-all duration-200`}
+      className={`absolute w-[42%] h-[42%] ${color} ${borderRadius[index]} 
+        ${
+          isActive
+            ? "animate-[glow_1s_ease-in-out] brightness-125 scale-105 opacity-90"
+            : ""
+        } 
+        hover:brightness-110 transition-all duration-300`}
       style={positions[index]}
       onClick={onClick}
     ></button>
