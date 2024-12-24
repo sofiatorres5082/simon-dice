@@ -2,11 +2,17 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useGameStore } from "../store/gameStore";
 
+import SimonButton from "../components/SimonButton";
+import ScoreDisplay from "../components/ScoreDisplay";
+import SequenceDisplay from "../components/SequenceDisplay";
+import StartButton from "../components/StartButton";
+import GameContainer from "../components/GameContainer";
+
 const colorMap: { [key: number]: string } = {
-  0: "bg-red-500",
-  1: "bg-green-500",
-  2: "bg-blue-500",
-  3: "bg-yellow-500",
+  0: "bg-[#eb80aa]",
+  1: "bg-[#ed91cd]",
+  2: "bg-[#f0a8d9]",
+  3: "bg-[#df5577]",
 };
 
 const GamePage = () => {
@@ -36,7 +42,6 @@ const GamePage = () => {
     addPlayerInput(num);
     const newPlayerInput = [...playerInput, num];
 
-    // Verificar si el jugador ha fallado
     if (
       newPlayerInput[newPlayerInput.length - 1] !==
       sequence[newPlayerInput.length - 1]
@@ -45,7 +50,6 @@ const GamePage = () => {
       return;
     }
 
-    // Si el jugador ha completado la secuencia correctamente
     if (newPlayerInput.length === sequence.length) {
       incrementScore();
       resetInput();
@@ -67,71 +71,47 @@ const GamePage = () => {
   }, [isGameActive, sequence]);
 
   return (
-    <div className="h-screen flex flex-col items-center justify-center bg-gray-800">
-      <h1 className="text-3xl font-bold text-white mb-6">Juego Simon Dice</h1>
-
-      {/* Estado del juego y puntuacion */}
-      {isGameActive ? (
-        <p>
-          Puntaje: <span className="font-bold">{score}</span>
-        </p>
-      ) : (
-        <p>
-          {playerInput.length === 0
-            ? "¡Preparate para jugar!"
-            : "Juego terminado. Puntaje final:"}{" "}
-          <span className="font-bold">{score}</span>
-        </p>
-      )}
-
-      {/* Botones del juego */}
-      <div className="relative w-64 h-64 rounded-full bg-gray-800 flex items-center justify-center">
-        {["Red", "Green", "Blue", "Yellow"].map((_color, index) => (
-          <button
-            key={index}
-            className={`absolute w-1/2 h-1/2 ${colorMap[index]} text-white`}
-            style={{
-              transformOrigin: "center",
-              transform: `rotate(${index * 90}deg) translate(50%) rotate(-${
-                index * 90
-              }deg)`,
-            }}
-            onClick={() => handlePlayerInput(index)}
-          ></button>
-        ))}
+    <div className="min-h-screen bg-[url('/images/SimonDiceBackground.png')] bg-cover bg-center bg-fixed overflow-hidden ">
+      {/* Puntuación */}
+      <div className="mb-10">
+        <ScoreDisplay
+          score={score}
+          isGameActive={isGameActive}
+          playerInputLength={playerInput.length}
+        />
       </div>
-      {/* Botón de comenzar */}
-      {!isGameActive && (
-        <button
-          className="absolute w-16 h-16 bg-white text-gray-800 text-center text-sm rounded-full transform transition-all hover:scale-110"
-          onClick={handleStartGame}
+
+      <div className="flex flex-col justify-center items-center ">
+        {/* Botones del juego */}
+        <GameContainer>
+          {Object.keys(colorMap).map((key) => (
+            <SimonButton
+              key={key}
+              color={colorMap[parseInt(key)]}
+              index={parseInt(key)}
+              onClick={() => handlePlayerInput(parseInt(key))}
+            />
+          ))}
+          {!isGameActive && (
+            <div className="absolute flex items-center justify-center rounded-full z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <StartButton onClick={handleStartGame} />
+            </div>
+          )}
+        </GameContainer>
+
+        <Link
+          to="/"
+          className="mt-10 font-vividly text-[#ee97af] text-center 
+                   text-[clamp(1rem,4vw,1.5rem)] py-0.5 px-4
+                   border-4 border-[#ee97af] rounded-full 
+                   transform transition-all duration-300 
+                   hover:scale-110"
         >
-          Comenzar
-        </button>
-      )}
+          Volver al Inicio
+        </Link>
 
-      <Link
-        to="/"
-        className="mt-4 bg-[#f3cdf8] font-vividly text-[#947781] text-center text-2xl border-4 border-[#947781] rounded-full transform transition-all hover:scale-110 py-2"
-      >
-        Volver al Inicio
-      </Link>
-
-      {/* Mostrar secuencia de juego */}
-      <div className="mt-6">
-        <p>
-          Secuencia:{" "}
-          {isGameActive
-            ? sequence.map((num, index) => (
-                <span
-                  key={index}
-                  className={`mx-2 px-2 py-1 rounded bg-gray-700 text-sm`}
-                >
-                  {["Rojo", "Verde", "Azul", "Amarillo"][num]}
-                </span>
-              ))
-            : "El juego no está activo."}
-        </p>
+        {/* Mostrar secuencia de juego */}
+        <SequenceDisplay sequence={sequence} isGameActive={isGameActive} />
       </div>
     </div>
   );
