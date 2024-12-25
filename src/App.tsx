@@ -25,7 +25,6 @@ function App() {
 
   return (
     <div>
-      {/* Componente de carga */}
       <LoadingPage isLoading={isLoading} />
 
       <Suspense fallback={<LoadingPage isLoading={isLoading} />}>

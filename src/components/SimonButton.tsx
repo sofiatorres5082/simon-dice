@@ -13,7 +13,7 @@ const SimonButton: React.FC<SimonButtonProps> = ({
   onClick,
   isActive,
 }) => {
-  const [isPressed, setIsPressed] = useState(false); // Estado para controlar el "flash" del clic
+  const [isPressed, setIsPressed] = useState(false); 
 
   const borderRadius = [
     "rounded-3xl",
@@ -36,12 +36,10 @@ const SimonButton: React.FC<SimonButtonProps> = ({
     "bg-[#e25d90] shadow-[0_0_120px_rgb(226,93,144)]",
   ];
 
-  // Maneja el clic en el botón
   const handleClick = () => {
-    setIsPressed(true); // Activa el "flash"
-    onClick(); // Llama a la función onClick pasada como prop
+    setIsPressed(true); 
+    onClick(); 
 
-    // Después de un corto tiempo (por ejemplo, 200ms), desactiva el "flash"
     setTimeout(() => setIsPressed(false), 200);
   };
 
@@ -49,13 +47,13 @@ const SimonButton: React.FC<SimonButtonProps> = ({
     <button
       className={`absolute w-[42%] h-[42%] ${color} ${borderRadius[index]} 
         ${
-          isActive || isPressed // Aplica el efecto flash si está activo o presionado
+          isActive || isPressed 
             ? `${btnFlash[index]} brightness-125 scale-105 opacity-90`
             : ""
         } 
         hover:brightness-110 transition-all duration-300`}
       style={positions[index]}
-      onClick={handleClick} // Usamos handleClick en lugar de onClick directamente
+      onClick={handleClick}
     ></button>
   );
 };

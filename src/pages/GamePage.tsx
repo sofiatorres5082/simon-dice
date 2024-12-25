@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useGameStore } from "../store/gameStore";
 
 import SimonButton from "../components/SimonButton";
@@ -6,6 +6,7 @@ import ScoreDisplay from "../components/ScoreDisplay";
 import StartButton from "../components/StartButton";
 import GameContainer from "../components/GameContainer";
 import LoadingPage from "./LoadingPage";
+import GameOverModal from "../components/GameOverModal";
 
 interface GamePageProps {
   onBack: () => void;
@@ -30,14 +31,16 @@ const GamePage: React.FC<GamePageProps> = ({ onBack, setIsLoading }) => {
 
   const [activeButton, setActiveButton] = useState<number | null>(null);
   const [isReady, setIsReady] = useState(false);
+  const [isGameOver, setIsGameOver] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+  const [isShowingSequence, setIsShowingSequence] = useState(false);
 
   useEffect(() => {
-    // Simular preparación de la página del juego
     const prepareGame = async () => {
-      setIsLoading(true); // Activamos la pantalla de carga
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulación de carga
+      setIsLoading(true);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       setIsReady(true);
-      setIsLoading(false); // Desactivamos la pantalla de carga
+      setIsLoading(false);
     };
 
     prepareGame();
@@ -46,12 +49,15 @@ const GamePage: React.FC<GamePageProps> = ({ onBack, setIsLoading }) => {
   const handleStartGame = () => {
     resetGame();
     startGame();
+    setIsGameOver(false);
     setTimeout(() => {
       addToSequence(Math.floor(Math.random() * 4));
     }, 100);
   };
 
   const handlePlayerInput = (num: number) => {
+    if (!isGameActive || isShowingSequence) return;
+
     addPlayerInput(num);
     const newPlayerInput = [...playerInput, num];
 
@@ -60,6 +66,7 @@ const GamePage: React.FC<GamePageProps> = ({ onBack, setIsLoading }) => {
       sequence[newPlayerInput.length - 1]
     ) {
       endGame();
+      setIsGameOver(true);
       return;
     }
 
@@ -71,6 +78,17 @@ const GamePage: React.FC<GamePageProps> = ({ onBack, setIsLoading }) => {
       }, 1000);
     }
   };
+  const closeModal = () => {
+    setIsClosing(false);
+    setIsGameOver(false);
+  };
+
+  const handleClose = useCallback(() => {
+    setIsClosing(true);
+    setTimeout(() => {
+      closeModal();
+    }, 300);
+  }, []);
 
   useEffect(() => {
     resetGame();
@@ -78,6 +96,7 @@ const GamePage: React.FC<GamePageProps> = ({ onBack, setIsLoading }) => {
 
   useEffect(() => {
     if (isGameActive) {
+      setIsShowingSequence(true);
       const timers: NodeJS.Timeout[] = [];
 
       sequence.forEach((num, index) => {
@@ -85,6 +104,9 @@ const GamePage: React.FC<GamePageProps> = ({ onBack, setIsLoading }) => {
           setActiveButton(num);
           setTimeout(() => {
             setActiveButton(null);
+            if (index === sequence.length - 1) {
+              setIsShowingSequence(false);
+            }
           }, 500);
         }, index * 1000);
         timers.push(timer);
@@ -102,18 +124,20 @@ const GamePage: React.FC<GamePageProps> = ({ onBack, setIsLoading }) => {
 
   return (
     <div className="min-h-screen bg-[url('/images/SimonDiceBackground.png')] bg-cover bg-center bg-fixed overflow-hidden">
-      {/* Puntuación */}
-      <div className="absolute top-0 left-0 m-4">
-        <ScoreDisplay
-          maxScore={maxScore}
+      {isGameOver && (
+        <GameOverModal
+          score={score}
+          onClose={handleClose}
+          onRestart={handleStartGame}
+          isClosing={isClosing}
         />
+      )}
+      <div className="absolute top-0 left-0 m-4">
+        <ScoreDisplay maxScore={maxScore} />
       </div>
-
       <div className="max-w-4xl mx-auto flex flex-col items-center pt-20">
         <div className="flex flex-col items-center gap-10 w-full max-w-md px-4">
-          {/* Contenedor del juego */}
           <GameContainer isGameActive={isGameActive} score={score}>
-            {/* Botones del juego */}
             {[0, 1, 2, 3].map((num) => (
               <SimonButton
                 key={num}
@@ -130,21 +154,15 @@ const GamePage: React.FC<GamePageProps> = ({ onBack, setIsLoading }) => {
                 isActive={activeButton === num}
               />
             ))}
-
             {!isGameActive && (
-              <div className="absolute flex items-center justify-center w-[15%] h-[15%] sm:w-[20%] sm:h-[20%] min-w-[30px] min-h-[30px] sm:min-w-[50px] sm:min-h-[50px] max-w-[80px] max-h-[80px] sm:max-w-[100px] sm:max-h-[100px] rounded-full z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <div className="absolute flex items-center justify-center w-[15%] h-[15%] rounded-full z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 <StartButton onClick={handleStartGame} />
               </div>
             )}
           </GameContainer>
-
           <button
             onClick={onBack}
-            className="font-pedagogique text-[#ee97af] text-center 
-                   text-[clamp(1rem, 4vw, 1.25rem)] py-1.5 px-4
-                   border-4 border-[#ee97af] rounded-full 
-                   transform transition-all duration-300 
-                   hover:scale-110"
+            className="font-pedagogique text-[#ee97af] border-4 border-[#ee97af] rounded-full transform transition-all duration-300 hover:scale-110 py-1.5 px-4"
           >
             Volver al Inicio
           </button>
