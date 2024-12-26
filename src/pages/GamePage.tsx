@@ -27,7 +27,6 @@ const GamePage: React.FC<GamePageProps> = ({ onBack, setIsLoading }) => {
     resetInput,
     incrementScore,
     resetGame,
-    gameLevel,
   } = useGameStore();
 
   const [activeButton, setActiveButton] = useState<number | null>(null);
@@ -101,8 +100,6 @@ const GamePage: React.FC<GamePageProps> = ({ onBack, setIsLoading }) => {
       setIsShowingSequence(true);
       const timers: NodeJS.Timeout[] = [];
 
-      const delay = gameLevel === "facil" ? 1500 : gameLevel === "medio" ? 1000 : 200;
-
       sequence.forEach((num, index) => {
         const timer = setTimeout(() => {
           setActiveButton(num);
@@ -111,8 +108,8 @@ const GamePage: React.FC<GamePageProps> = ({ onBack, setIsLoading }) => {
             if (index === sequence.length - 1) {
               setIsShowingSequence(false);
             }
-          }, gameLevel === "dificil" ? 100 : 500); // Reduce aún más el tiempo de activación para el nivel difícil
-        }, index * delay);
+          }, 500);
+        }, index * 1000);
         timers.push(timer);
       });
 
@@ -120,7 +117,7 @@ const GamePage: React.FC<GamePageProps> = ({ onBack, setIsLoading }) => {
         timers.forEach((timer) => clearTimeout(timer));
       };
     }
-  }, [isGameActive, sequence, gameLevel]);
+  }, [isGameActive, sequence]);
 
   if (!isReady) {
     return <LoadingPage isLoading={!isReady} />;

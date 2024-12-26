@@ -6,7 +6,6 @@ type GameState = {
   sequence: number[];
   playerInput: number[];
   isGameActive: boolean;
-  gameLevel: string;
   startGame: () => void;
   endGame: () => void;
   addToSequence: (num: number) => void;
@@ -14,7 +13,6 @@ type GameState = {
   resetInput: () => void;
   incrementScore: () => void;
   resetGame: () => void;
-  setGameLevel: (level: string) => void;
 };
 
 export const useGameStore = create<GameState>((set) => ({
@@ -23,7 +21,6 @@ export const useGameStore = create<GameState>((set) => ({
   sequence: [],
   playerInput: [],
   isGameActive: false,
-  gameLevel: localStorage.getItem("gameLevel") || "medio",
 
   startGame: () =>
     set({ isGameActive: true, score: 0, sequence: [], playerInput: [] }),
@@ -49,9 +46,4 @@ export const useGameStore = create<GameState>((set) => ({
       playerInput: [],
       isGameActive: false,
     })),
-  setGameLevel: (level: string) =>
-    set(() => {
-      localStorage.setItem("gameLevel", level);
-      return { gameLevel: level };
-    }),
 }));

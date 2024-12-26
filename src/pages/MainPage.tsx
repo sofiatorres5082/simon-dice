@@ -1,7 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { useGameStore } from "../store/gameStore";
-import Modal from "../components/Modal";
-import StyledSelect from "../components/StyledSelect";
+import MainModal from "../components/MainModal";
 
 interface MainPageProps {
   onStart: () => void;
@@ -9,31 +7,14 @@ interface MainPageProps {
 
 interface ModalContent {
   title: string;
-  content: { label: string; value: string; icon?: string }[];
+  content: React.ReactNode;
   type: "config" | "howToPlay";
 }
 
 const MainPage: React.FC<MainPageProps> = ({ onStart }) => {
-  const { gameLevel, setGameLevel } = useGameStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [modalContent, setModalContent] = useState<ModalContent | null>(null);
-
-  const levelOptions = [
-    { value: "facil", label: "Fácil" },
-    { value: "medio", label: "Medio" },
-    { value: "dificil", label: "Difícil" },
-  ];
-
-  const handleLevelChange = (level: string) => {
-    setGameLevel(level);
-    setModalContent((prevContent) => ({
-      ...prevContent!,
-      content: prevContent!.content.map((item) =>
-        item.label === "Nivel de juego" ? { ...item, value: level } : item
-      ),
-    }));
-  };
 
   const closeModal = useCallback(() => {
     setIsClosing(true);
@@ -46,13 +27,7 @@ const MainPage: React.FC<MainPageProps> = ({ onStart }) => {
   const openConfigModal = () => {
     setModalContent({
       title: "Configuración",
-      content: [
-        {
-          label: "Nivel de juego",
-          value: gameLevel,
-          icon: "/images/star3.png",
-        },
-      ],
+      content: <div>Configuración del juego</div>,
       type: "config",
     });
     setIsModalOpen(true);
@@ -61,23 +36,57 @@ const MainPage: React.FC<MainPageProps> = ({ onStart }) => {
   const openHowToPlayModal = () => {
     setModalContent({
       title: "Cómo jugar",
-      content: [
-        {
-          label: "Paso 1",
-          icon: "/images/star3.png",
-          value: "Presta atención a la secuencia de colores",
-        },
-        {
-          label: "Paso 2",
-          icon: "/images/star4.png",
-          value: "Repite la secuencia correctamente",
-        },
-        {
-          label: "Paso 3",
-          icon: "/images/star5.png",
-          value: "Cada ronda añade un nuevo color",
-        },
-      ],
+      content: (
+        <div className="space-y-4 xs:space-y-5 sm:space-y-6">
+          <div className="flex items-center gap-3 group">
+            <div className="w-8 h-8 xs:w-10 xs:h-10 sm:w-11 sm:h-11 flex-shrink-0">
+              <img
+                src="/images/star3.png"
+                alt="Paso 1"
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <p
+              className="font-pedagogique text-white 
+                      text-sm sm:text-base"
+            >
+              Presta atención a la secuencia de colores
+            </p>
+          </div>
+
+          <div className="flex items-center gap-3 group">
+            <div className="w-8 h-8 xs:w-10 xs:h-10 sm:w-11 sm:h-11 flex-shrink-0">
+              <img
+                src="/images/star4.png"
+                alt="Paso 2"
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <p
+              className="font-pedagogique text-white 
+                       text-sm sm:text-base"
+            >
+              Repite la secuencia correctamente
+            </p>
+          </div>
+
+          <div className="flex items-center gap-3 group">
+            <div className="w-8 h-8 xs:w-10 xs:h-10 sm:w-11 sm:h-11 flex-shrink-0">
+              <img
+                src="/images/star5.png"
+                alt="Paso 3"
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <p
+              className="font-pedagogique text-white 
+                       text-sm sm:text-base"
+            >
+              Cada ronda añade un nuevo color
+            </p>
+          </div>
+        </div>
+      ),
       type: "howToPlay",
     });
     setIsModalOpen(true);
@@ -196,22 +205,13 @@ const MainPage: React.FC<MainPageProps> = ({ onStart }) => {
 
       {/* Modal */}
       {isModalOpen && modalContent && (
-        <Modal
+        <MainModal
           title={modalContent.title}
-          content={modalContent.content}
-          onClose={closeModal}
+          closeModal={closeModal}
           isClosing={isClosing}
         >
-          {modalContent.type === "config" && (
-            <div className="p-4">
-              <StyledSelect
-                value={gameLevel}
-                onChange={handleLevelChange}
-                options={levelOptions}
-              />
-            </div>
-          )}
-        </Modal>
+          {modalContent.content}
+        </MainModal>
       )}
     </div>
   );
