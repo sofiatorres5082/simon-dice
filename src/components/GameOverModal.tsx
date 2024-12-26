@@ -68,10 +68,10 @@ const GameOverModal: React.FC<GameOverModalProps> = ({
         </p>
 
         {/* Botones */}
-        <div className="flex justify-center gap-4 mt-6">
+        <div className="flex justify-center gap-6 mt-6">
           <button
             onClick={onRestart}
-            className="bg-[#ee97af] font-pedagogique text-white text-center text-[clamp(1rem, 4vw, 1.25rem)] py-1 px-4 border-2 border-white rounded-full transform transition-all duration-300 hover:scale-110"
+            className="border-2 border-[#ffd8e3] font-pedagogique text-white text-center text-sm sm:text-base bg-[#df6c8d] py-0.5 px-4 max-w-[60%] sm:max-w-[45%] mx-auto tracking-wider rounded-full transform transition-all duration-300 hover:scale-110"
           >
             Reiniciar
           </button>

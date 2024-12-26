@@ -23,6 +23,7 @@ function App() {
     }, 800);
   };
 
+  
   return (
     <div>
       <LoadingPage isLoading={isLoading} />
