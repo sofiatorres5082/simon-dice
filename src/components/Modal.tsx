@@ -58,7 +58,7 @@ const Modal: React.FC<ModalProps> = ({
           className="absolute block top-[60%] -right-[5%] w-[8%] sm:w-[8%] aspect-square z-10 min-w-[24px]"
         />
 
-        <h2 className="border-2 border-[#ffd8e3] font-pedagogique text-white text-center text-sm sm:text-base bg-[#df6c8d] rounded-full py-0.5 max-w-[60%] sm:max-w-[45%] mx-auto tracking-wider select-none">
+        <h2 className="border-2 border-[#ffd8e3] font-pedagogique text-white text-center text-sm sm:text-base bg-[#df6c8d] rounded-full py-0.5 max-w-[70%] sm:max-w-[50%] mx-auto tracking-wider select-none">
           {title}
         </h2>
 
