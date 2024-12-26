@@ -4,6 +4,7 @@ import { Suspense, lazy, useEffect, useState } from "react";
 const MainPage = lazy(() => import("./pages/MainPage"));
 const GamePage = lazy(() => import("./pages/GamePage"));
 const LoadingPage = lazy(() => import("./pages/LoadingPage"));
+const ErrorPage = lazy(() => import("./pages/ErrorPage"));
 
 import "./App.css";
 
@@ -41,6 +42,7 @@ function App() {
               />
             }
           />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Suspense>
     </div>
