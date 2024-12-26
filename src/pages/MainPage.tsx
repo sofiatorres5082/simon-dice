@@ -84,7 +84,7 @@ const MainPage: React.FC<MainPageProps> = ({ onStart }) => {
   };
 
   return (
-    <div className="min-h-screen bg-[url('/images/SimonDiceBackground.png')] bg-cover bg-center bg-fixed flex flex-col overflow-hidden justify-center items-center">
+    <div className="min-h-[100dvh] bg-[url('/images/SimonDiceBackground.png')] bg-cover bg-center bg-fixed flex flex-col overflow-hidden justify-center items-center">
       {/* Estrellas flotantes */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Estrellas lado izquierdo - mezcladas */}

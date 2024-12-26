@@ -102,7 +102,7 @@ const GamePage: React.FC<GamePageProps> = ({ onBack, setIsLoading }) => {
       const timers: NodeJS.Timeout[] = [];
 
       const delay =
-        gameLevel === "facil" ? 1500 : gameLevel === "medio" ? 1000 : 200;
+        gameLevel === "facil" ? 1500 : gameLevel === "medio" ? 1000 : 500;
 
       sequence.forEach((num, index) => {
         const timer = setTimeout(() => {
@@ -114,7 +114,7 @@ const GamePage: React.FC<GamePageProps> = ({ onBack, setIsLoading }) => {
                 setIsShowingSequence(false);
               }
             },
-            gameLevel === "dificil" ? 700 : 500
+            gameLevel === "dificil" ? 300 : 500
           );
         }, index * delay);
         timers.push(timer);
@@ -131,7 +131,7 @@ const GamePage: React.FC<GamePageProps> = ({ onBack, setIsLoading }) => {
   }
 
   return (
-    <div className="min-h-screen bg-[url('/images/SimonDiceBackground.png')] bg-cover bg-center bg-fixed overflow-hidden">
+    <div className="min-h-[100dvh] bg-[url('/images/SimonDiceBackground.png')] bg-cover bg-center bg-fixed overflow-hidden">
       {isGameOver && (
         <GameOverModal
           score={score}

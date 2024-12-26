@@ -51,7 +51,7 @@ const SimonButton: React.FC<SimonButtonProps> = ({
             ? `${btnFlash[index]} brightness-125 scale-105 opacity-90`
             : ""
         } 
-        hover:brightness-110 transition-all duration-300`}
+        hover:brightness-110 transition-all duration-200`}
       style={positions[index]}
       onClick={handleClick}
     ></button>
