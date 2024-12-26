@@ -26,7 +26,6 @@ function App() {
   return (
     <div>
       <LoadingPage isLoading={isLoading} />
-
       <Suspense fallback={<LoadingPage isLoading={isLoading} />}>
         <Routes>
           <Route
