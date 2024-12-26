@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { useGameStore } from "../store/gameStore";
 import Modal from "../components/Modal";
-import StyledSelect from "../components/StyledSelect";
+import CustomSelect from "../components/CustomSelect";
 
 interface MainPageProps {
   onStart: () => void;
@@ -203,8 +203,8 @@ const MainPage: React.FC<MainPageProps> = ({ onStart }) => {
           isClosing={isClosing}
         >
           {modalContent.type === "config" && (
-            <div className="p-4">
-              <StyledSelect
+            <div className="p-4 flex justify-center">
+              <CustomSelect
                 value={gameLevel}
                 onChange={handleLevelChange}
                 options={levelOptions}

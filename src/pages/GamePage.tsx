@@ -101,17 +101,21 @@ const GamePage: React.FC<GamePageProps> = ({ onBack, setIsLoading }) => {
       setIsShowingSequence(true);
       const timers: NodeJS.Timeout[] = [];
 
-      const delay = gameLevel === "facil" ? 1500 : gameLevel === "medio" ? 1000 : 200;
+      const delay =
+        gameLevel === "facil" ? 1500 : gameLevel === "medio" ? 1000 : 200;
 
       sequence.forEach((num, index) => {
         const timer = setTimeout(() => {
           setActiveButton(num);
-          setTimeout(() => {
-            setActiveButton(null);
-            if (index === sequence.length - 1) {
-              setIsShowingSequence(false);
-            }
-          }, gameLevel === "dificil" ? 100 : 500); // Reduce aún más el tiempo de activación para el nivel difícil
+          setTimeout(
+            () => {
+              setActiveButton(null);
+              if (index === sequence.length - 1) {
+                setIsShowingSequence(false);
+              }
+            },
+            gameLevel === "dificil" ? 700 : 500
+          );
         }, index * delay);
         timers.push(timer);
       });

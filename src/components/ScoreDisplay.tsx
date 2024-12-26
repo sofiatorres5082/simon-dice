@@ -6,7 +6,7 @@ interface ScoreDisplayProps {
 
 const ScoreDisplay: React.FC<ScoreDisplayProps> = ({ maxScore }) => {
   useEffect(() => {
-    console.log("Max score updated:", maxScore);
+    localStorage.setItem("maxScore", maxScore.toString());
   }, [maxScore]);
 
   return (

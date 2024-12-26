@@ -31,11 +31,10 @@ const Modal: React.FC<ModalProps> = ({
       }`}
     >
       <div
-        className={`bg-[#292929] rounded-lg p-4 sm:p-6 w-full max-w-[95%] sm:max-w-md border-2 sm:border-4 border-[#eb97af] transform relative ${
+        className={`bg-[#292929] rounded-lg p-4 sm:p-12 w-full max-w-[95%] sm:max-w-md border-2 sm:border-4 border-[#eb97af] transform relative ${
           isClosing ? "animate-zoomOut" : "animate-zoomCenter"
         }`}
       >
-        {/* Botón de cierre */}
         <button
           className="absolute top-1 sm:top-2 right-1 sm:right-2 w-8 sm:w-10 h-8 sm:h-10 flex items-center justify-center transition-all duration-300"
           onClick={onClose}
@@ -46,7 +45,6 @@ const Modal: React.FC<ModalProps> = ({
           </span>
         </button>
 
-        {/* Decoraciones */}
         <img
           src="/images/highlight1.png"
           className="absolute block top-[10%] -left-[5%] w-[8%] sm:w-[8%] aspect-square z-10 transform rotate-[-5deg] min-w-[24px]"
@@ -60,12 +58,10 @@ const Modal: React.FC<ModalProps> = ({
           className="absolute block top-[60%] -right-[5%] w-[8%] sm:w-[8%] aspect-square z-10 min-w-[24px]"
         />
 
-        {/* Título */}
         <h2 className="border-2 border-[#ffd8e3] font-pedagogique text-white text-center text-sm sm:text-base bg-[#df6c8d] rounded-full py-0.5 max-w-[60%] sm:max-w-[45%] mx-auto tracking-wider select-none">
           {title}
         </h2>
 
-        {/* Contenido: Reglas */}
         <div className="space-y-3 sm:space-y-4 mt-4">
           {content.map((item, index) => (
             <div key={index} className="flex items-start gap-2 sm:gap-3">
@@ -76,7 +72,6 @@ const Modal: React.FC<ModalProps> = ({
                   className="w-5 h-5 sm:w-7 sm:h-7 mt-0.5"
                 />
               )}
-
               <div>
                 <p className="font-pedagogique text-sm sm:text-[15px] text-[#df6c8d] select-none leading-snug">
                   {item.label}
